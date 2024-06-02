@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Go Remote Check</title>
+    <link rel="icon" href="data:," />
+    <!-- Prevent favicon request -->
+    <script src="https://unpkg.com/htmx.org@1.9.12/dist/htmx.min.js"></script>
+  </head>
+  <body>
+    <script>
+      document.addEventListener("htmx:responseError", function (event) {
+        var errorMessage = event.detail.xhr.response;
+        var errorElement = document.getElementById("error-message");
+        errorElement.textContent = errorMessage;
+        errorElement.style.display = "block";
+      });
+    </script>
+    <div id="error-message" style="display: none; border: 1px solid red"></div>
+    <div style="border: 1px solid black; padding: 10px">
+      <h2>Get (HTTP)</h2>
+      <button
+        type="button"
+        onclick="document.querySelector('input[name=url]').value = 'https://ifconfig.co'"
+      >
+        ifconfig.co
+      </button>
+      <form id="http-get" onsubmit="return false;">
+        <input type="text" name="url" placeholder="Enter URL" />
+        <button type="submit" hx-post="/http-get" hx-target="#http-get-result">
+          Submit
+        </button>
+      </form>
+      <div>
+        <pre id="http-get-result"></pre>
+      </div>
+    </div>
+  </body>
+</html>
