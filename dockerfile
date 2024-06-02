@@ -8,10 +8,7 @@ LABEL maintainer="Cédric L'homme <public@l-homme.com>"
 WORKDIR /app
 
 # Copy go mod and sum files
-COPY go.mod go.sum ./
-
-# Download all dependencies. Dependencies will be cached if the go.mod and go.sum files are not changed
-RUN go mod download
+COPY go.mod ./
 
 # Copy the source from the current directory to the Working Directory inside the container
 COPY . .
@@ -26,7 +23,7 @@ FROM alpine:latest
 WORKDIR /root/
 
 # Copy the pre-built binary file from the previous stage
-COPY --from=builder /app/main .
+COPY --from=builder /app/main /app/template.html ./
 
 # Expose port 8080 to the outside world
 EXPOSE 8080
