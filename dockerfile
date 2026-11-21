@@ -1,5 +1,5 @@
 # Start from the latest golang base image as builder
-FROM golang:1.21 AS builder
+FROM golang:1.27 AS builder
 
 # Add Maintainer Info
 LABEL maintainer="Cédric L'homme <public@l-homme.com>"
