@@ -25,11 +25,18 @@
       >
         ifconfig.co
       </button>
+      <button
+        type="button"
+        onclick="document.querySelector('input[name=url]').value = 'https://ipinfo.io/json'"
+      >
+        ipinfo.io/json
+      </button>
       <form id="http-get" onsubmit="return false;">
         <input type="text" name="url" placeholder="Enter URL" />
-        <button type="submit" hx-post="/http-get" hx-target="#http-get-result">
+        <button type="submit" hx-post="/http-get" hx-target="#http-get-result" hx-indicator="#loading-indicator">
           Submit
         </button>
+        <span id="loading-indicator" class="htmx-indicator" style="margin-left: 10px;">Loading...</span>
       </form>
       <div>
         <pre id="http-get-result"></pre>
